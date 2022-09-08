@@ -29,6 +29,10 @@ MonoBehaviour:
     m_Address: GunSmoke
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 582366dd04f1f604d8f75e4e55c89f3e
+    m_Address: Blood
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1a03c78fbbe4de44eb99817ed0a042b7, type: 2}
   m_SchemaSet:
