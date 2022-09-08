@@ -456,10 +456,17 @@ MonoBehaviour:
   crosshair: {fileID: 8342543998343960882}
   crosshairOuterRange: {fileID: 8342543997663559225}
   Img_Crosshair: {fileID: 8342543997357018627}
-  CanShoot: 1
+  CanShoot: 0
   holdingTimer: 0.5
   currentHoldingTime: 0
   startFiring: 0
+  drawGunPanel: {fileID: 8342543996967380527}
+  indicator: {fileID: 8342543998709797315}
+  bottomMarker: {fileID: 8342543997727532373}
+  upperMarker: {fileID: 8342543998231836864}
+  indicatorRunningSpeed: 0.2
+  beginToDraw: 0
+  networkRevolver: {fileID: 4715754316945564243}
   damage: 35
   shotDelay: 1
   firePoint: {fileID: 7655740730510074693}
@@ -2228,6 +2235,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b716c41e9b56b4baafaf13a523ba2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4715754316945564243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1065525440028938392, guid: f5cd2fc14cd9543ae961154a7074aca8, type: 3}
+  m_PrefabInstance: {fileID: 5744403098783134411}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cac635f24954048aad3a6ff9110beb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8943515034534725306 stripped

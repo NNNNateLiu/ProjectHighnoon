@@ -21,6 +21,9 @@ public sealed class PawnCameraLook : NetworkBehaviour
 		base.OnStartNetwork();
 
 		_input = GetComponent<PawnInput>();
+		
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
 	public override void OnStartClient()

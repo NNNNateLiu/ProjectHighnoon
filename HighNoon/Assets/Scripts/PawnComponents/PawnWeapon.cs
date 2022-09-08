@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
+using FishNet.Component.Animating;
 
 public sealed class PawnWeapon : NetworkBehaviour
 {
@@ -22,6 +23,16 @@ public sealed class PawnWeapon : NetworkBehaviour
 	public float holdingTimer = 0.5f;
 	public float currentHoldingTime;
 	public bool startFiring;
+
+	[Header("Indicator")]
+	public GameObject drawGunPanel;
+	public GameObject indicator;
+	public RectTransform bottomMarker;
+	public RectTransform upperMarker;
+	public float indicatorRunningSpeed;
+	public bool beginToDraw;
+	
+	public NetworkAnimator networkRevolver;
 
 	[SerializeField]
 	private float damage;
@@ -67,12 +78,19 @@ public sealed class PawnWeapon : NetworkBehaviour
 			{
 				Debug.Log("Draw Too Soon");
 			}
-            
-			//drawGunPanel.SetActive(true);
-			//beginToDraw = true;
-			//indicator.GetComponent<RectTransform>().localPosition = bottomMarker.localPosition;
+			drawGunPanel.SetActive(true);
+			beginToDraw = true;
+			indicator.GetComponent<RectTransform>().localPosition = bottomMarker.localPosition;
 		}
+		if (Input.GetKeyUp(KeyCode.LeftCommand) && !CanShoot)
+		{
+			drawGunPanel.SetActive(false);
+			beginToDraw = false;
+			CheckIfDrawSuccessfully();
+		}
+		
 		ShootingTimer();
+		DrawGunCheck();
 
 		/*
 		if (_timeUntilNextShot <= 0.0f)
@@ -107,6 +125,31 @@ public sealed class PawnWeapon : NetworkBehaviour
 			}
 		}
 	}
+
+	public void DrawGunCheck()
+	{
+		if (beginToDraw)
+		{
+			Vector3 tempPos = indicator.GetComponent<RectTransform>().localPosition;
+			if (tempPos.y > upperMarker.localPosition.y || tempPos.y < bottomMarker.localPosition.y)
+			{
+				indicatorRunningSpeed *= -1;
+			}
+			tempPos.y += indicatorRunningSpeed;
+			indicator.GetComponent<RectTransform>().localPosition = tempPos;
+		}
+	}
+	
+	public void CheckIfDrawSuccessfully()
+	{
+		if (indicator.GetComponent<RectTransform>().localPosition.y <= 56 &&
+		    indicator.GetComponent<RectTransform>().localPosition.y >= 36)
+		{
+			CanShoot = true;
+			crosshair.SetActive(true);
+			networkRevolver.SetTrigger("DrawGun");
+		}
+	}
 	
 	private Vector3 BulletDirectionWithSpreed(float spread)
 	{
@@ -135,7 +178,11 @@ public sealed class PawnWeapon : NetworkBehaviour
 	{
 		GameObject bulletPrefab = Addressables.LoadAssetAsync<GameObject>("Bullet").WaitForCompletion();
 		
+		GameObject gunSmokePrefab = Addressables.LoadAssetAsync<GameObject>("GunSmoke").WaitForCompletion();
+		
 		GameObject thisBullet = Instantiate(bulletPrefab, firePointPosition, Quaternion.identity);
+
+		GameObject thisBulletGunSmoke = Instantiate(gunSmokePrefab, firePointPosition, Quaternion.identity);
         
 		Vector3 bulletDirection = BulletDirectionWithSpreed(spread).normalized;
         
@@ -144,6 +191,7 @@ public sealed class PawnWeapon : NetworkBehaviour
 		thisBullet.GetComponent<Rigidbody>().AddForce(bulletDirection * shootForce, ForceMode.Impulse);
 		thisBullet.GetComponent<Rigidbody>().AddForce(_cameraLook.myCamera.transform.up * upwardForce, ForceMode.Impulse);
         
+		ServerManager.Spawn(thisBulletGunSmoke);
 		ServerManager.Spawn(thisBullet);
 		if (Physics.Raycast(firePointPosition, firePointDirection, out RaycastHit hit) && hit.transform.TryGetComponent(out Pawn pawn))
 		{

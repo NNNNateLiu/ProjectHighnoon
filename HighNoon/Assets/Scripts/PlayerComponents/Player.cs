@@ -60,7 +60,7 @@ public sealed class Player : NetworkBehaviour
 
 	public void StartGame()
 	{
-		EnterFirstPersonMode();
+
 		
 		GameObject pawnPrefab = Addressables.LoadAssetAsync<GameObject>("Pawn").WaitForCompletion();
 
@@ -92,18 +92,6 @@ public sealed class Player : NetworkBehaviour
 		isReady = value;
 	}
 
-	[ServerRpc(RequireOwnership = false)]
-	public void EnterFirstPersonMode()
-	{
-		Debug.Log("enter mode");
-		if (!IsOwner) return;
-		
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
-		Debug.Log("locked");
-	}
-	
-
 	[TargetRpc]
 	private void TargetPawnSpawned(NetworkConnection networkConnection)
 	{
@@ -114,5 +102,7 @@ public sealed class Player : NetworkBehaviour
 	public void TargetPawnKilled(NetworkConnection networkConnection)
 	{
 		UIManager.Instance.Show<RespawnView>();
+		Cursor.lockState = CursorLockMode.None;
+		Cursor.visible = true;
 	}
 }

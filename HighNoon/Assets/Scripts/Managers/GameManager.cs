@@ -39,6 +39,7 @@ public sealed class GameManager : NetworkBehaviour
 			if (roundTotalTime >= 5)
 			{
 				isLegalToDraw = true;
+				Debug.Log("able to draw");
 			}
 			roundTotalTime += Time.deltaTime;
 		}
