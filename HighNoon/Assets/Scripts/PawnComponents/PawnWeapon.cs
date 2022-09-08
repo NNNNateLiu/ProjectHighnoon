@@ -23,6 +23,11 @@ public sealed class PawnWeapon : NetworkBehaviour
 	public float holdingTimer = 0.5f;
 	public float currentHoldingTime;
 	public bool startFiring;
+	
+	[Header("Bullets")]
+	public int bulletCount = 6;
+	public List<GameObject> bulletsInCylinder;
+	public int currentBulletIndex = 0;
 
 	[Header("Indicator")]
 	public GameObject drawGunPanel;
@@ -71,18 +76,24 @@ public sealed class PawnWeapon : NetworkBehaviour
 			crosshairOuterRange.transform.localScale = Vector3.one;
 			Img_Crosshair.color = Color.black;
 		}
+		
+		if (Input.GetKeyDown(KeyCode.R) && CanShoot)
+		{
+			
+		}
 
-		if (Input.GetKeyDown(KeyCode.LeftCommand) && !CanShoot)
+		if (Input.GetKeyDown(KeyCode.LeftControl) && !CanShoot)
 		{
 			if (!GameManager.Instance.isLegalToDraw)
 			{
 				Debug.Log("Draw Too Soon");
+				return;
 			}
 			drawGunPanel.SetActive(true);
 			beginToDraw = true;
 			indicator.GetComponent<RectTransform>().localPosition = bottomMarker.localPosition;
 		}
-		if (Input.GetKeyUp(KeyCode.LeftCommand) && !CanShoot)
+		if (Input.GetKeyUp(KeyCode.LeftControl) && !CanShoot)
 		{
 			drawGunPanel.SetActive(false);
 			beginToDraw = false;
@@ -118,12 +129,25 @@ public sealed class PawnWeapon : NetworkBehaviour
 			Img_Crosshair.color = Color.Lerp(Color.black, Color.red, currentHoldingTime/holdingTimer);
 			if (currentHoldingTime >= holdingTimer)
 			{
+				if (bulletCount == 0)
+				{
+					return;
+				}
 				ServerFire(firePoint.position, firePoint.forward,0.1f);
+				networkRevolver.SetTrigger("AimFire");
 				currentHoldingTime = 0;
 				crosshairOuterRange.transform.localScale = Vector3.one;
 				Img_Crosshair.color = Color.black;
+				consumingBullet();
 			}
 		}
+	}
+	
+	public void consumingBullet()
+	{
+		bulletCount--;
+		bulletsInCylinder[currentBulletIndex].SetActive(false);
+		currentBulletIndex++;
 	}
 
 	public void DrawGunCheck()

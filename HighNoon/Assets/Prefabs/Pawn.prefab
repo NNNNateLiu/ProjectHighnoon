@@ -460,6 +460,15 @@ MonoBehaviour:
   holdingTimer: 0.5
   currentHoldingTime: 0
   startFiring: 0
+  bulletCount: 6
+  bulletsInCylinder:
+  - {fileID: 8342543998339817994}
+  - {fileID: 8342543998664630467}
+  - {fileID: 8342543998464541596}
+  - {fileID: 8342543998802687816}
+  - {fileID: 8342543998407599873}
+  - {fileID: 8342543997912755296}
+  currentBulletIndex: 0
   drawGunPanel: {fileID: 8342543996967380527}
   indicator: {fileID: 8342543998709797315}
   bottomMarker: {fileID: 8342543997727532373}
@@ -1120,7 +1129,7 @@ GameObject:
   - component: {fileID: 8342543997912755309}
   - component: {fileID: 8342543997912755310}
   m_Layer: 5
-  m_Name: Bullet (2)
+  m_Name: Bullet6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1139,7 +1148,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8342543999004441126}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1232,7 +1241,7 @@ GameObject:
   - component: {fileID: 8342543998339818007}
   - component: {fileID: 8342543998339817992}
   m_Layer: 5
-  m_Name: Bullet (4)
+  m_Name: Bullet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1247,11 +1256,11 @@ RectTransform:
   m_GameObject: {fileID: 8342543998339817994}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8342543999004441126}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1346,7 +1355,7 @@ GameObject:
   - component: {fileID: 8342543998407599886}
   - component: {fileID: 8342543998407599887}
   m_Layer: 5
-  m_Name: Bullet (3)
+  m_Name: Bullet5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1361,11 +1370,11 @@ RectTransform:
   m_GameObject: {fileID: 8342543998407599873}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8342543999004441126}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1422,7 +1431,7 @@ GameObject:
   - component: {fileID: 8342543998464541593}
   - component: {fileID: 8342543998464541594}
   m_Layer: 5
-  m_Name: Bullet (1)
+  m_Name: Bullet3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1441,7 +1450,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8342543999004441126}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1574,7 +1583,7 @@ GameObject:
   - component: {fileID: 8342543998664630464}
   - component: {fileID: 8342543998664630465}
   m_Layer: 5
-  m_Name: Bullet
+  m_Name: Bullet2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1593,7 +1602,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8342543999004441126}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1726,7 +1735,7 @@ GameObject:
   - component: {fileID: 8342543998802687829}
   - component: {fileID: 8342543998802687830}
   m_Layer: 5
-  m_Name: Bullet (5)
+  m_Name: Bullet4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1745,7 +1754,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8342543999004441126}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2013,12 +2022,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8342543997017774611}
+  - {fileID: 8342543998339817993}
   - {fileID: 8342543998664630466}
   - {fileID: 8342543998464541595}
-  - {fileID: 8342543997912755311}
-  - {fileID: 8342543998407599872}
-  - {fileID: 8342543998339817993}
   - {fileID: 8342543998802687831}
+  - {fileID: 8342543998407599872}
+  - {fileID: 8342543997912755311}
   m_Father: {fileID: 617333856}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
